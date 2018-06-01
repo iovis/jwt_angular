@@ -9,13 +9,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./private.component.css']
 })
 export class PrivateComponent implements OnInit {
-  public content: Observable<string>;
+  public content: string;
 
-  constructor(
-    private api: ApiService
-  ) { }
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
-    this.content = this.api.getPrivate();
+    this.api
+      .getPrivate()
+      .subscribe(data => (this.content = JSON.stringify(data, null, 2)));
   }
 }
