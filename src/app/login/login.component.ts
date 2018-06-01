@@ -11,6 +11,7 @@ import { AuthenticationService } from '../authentication.service';
 export class LoginComponent {
   public email: string;
   public password: string;
+  public error: string;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -18,10 +19,12 @@ export class LoginComponent {
   ) {}
 
   public login() {
+    this.error = null;
+
     this.authenticationService.login(this.email, this.password)
       .subscribe(
         data => this.successForm(data),
-        error => console.log(error.error.error)
+        error => this.errorForm(error)
       );
   }
 
@@ -32,5 +35,9 @@ export class LoginComponent {
       localStorage.setItem('rmd-token', data.auth_token);
       this.router.navigate(['/']);
     }
+  }
+
+  private errorForm(data) {
+    this.error = data.error.error;
   }
 }
