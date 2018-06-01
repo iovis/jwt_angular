@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PublicComponent } from './public/public.component';
 import { LoginComponent } from './login/login.component';
+import { PrivateComponent } from './private/private.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     PublicComponent,
-    LoginComponent
+    LoginComponent,
+    PrivateComponent
   ],
   imports: [
     BrowserModule,
