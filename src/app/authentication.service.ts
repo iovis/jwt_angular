@@ -24,6 +24,18 @@ export class AuthenticationService {
       }
     };
 
-    return this.http.post(`${this.apiUrl}/users/sign_in`, loginData, httpOptions);
+    return this.http.post(
+      `${this.apiUrl}/users/sign_in`,
+      loginData,
+      httpOptions
+    );
+  }
+
+  refreshToken() {
+    return this.http.post(
+      `${this.apiUrl}/users/refresh_token`,
+      null,
+      this.tokenService.headers
+    );
   }
 }
