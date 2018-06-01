@@ -1,28 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../authentication.service';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   constructor(
-    private authenticationService: AuthenticationService,
+    private tokenService: TokenService,
     private router: Router
   ) {}
 
-  ngOnInit() {}
-
   get isLoggedIn(): boolean {
-    return this.authenticationService.isLoggedIn;
+    return this.tokenService.isLoggedIn;
   }
 
   logout() {
-    console.log('logout');
-    localStorage.removeItem('rmd-token');
+    this.tokenService.clearToken();
     this.router.navigate(['/']);
+    console.log('logout');
   }
 }

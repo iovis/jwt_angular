@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { TokenService } from './token.service';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -9,20 +11,15 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public token: string;
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
-  get isLoggedIn(): boolean {
-    return !!localStorage.getItem('rmd-token');
-  }
-
-  public login(email, password) {
+  login(email, password) {
     const loginData = {
-      'user_login': {
-        'login': email,
-        'password': password
+      user_login: {
+        login: email,
+        password: password
       }
     };
 

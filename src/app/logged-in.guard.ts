@@ -6,18 +6,18 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthenticationService } from './authentication.service';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggedInGuard implements CanActivate {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private tokenService: TokenService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authenticationService.isLoggedIn;
+    return this.tokenService.isLoggedIn;
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../authentication.service';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,29 +16,32 @@ export class LoginComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
+    private tokenService: TokenService,
     private router: Router
   ) {}
 
-  public login() {
+  public login(): void {
     this.error = null;
 
     this.authenticationService.login(this.email, this.password)
       .subscribe(
         data => this.successForm(data),
-        error => this.errorForm(error)
+        error => this.errorForm(error.error)
       );
   }
 
-  private successForm(data) {
+  private successForm(data): void {
     console.log(data);
 
     if (data.success) {
-      localStorage.setItem('rmd-token', data.auth_token);
+      this.tokenService.token = data.auth_token;
       this.router.navigate(['/']);
+    } else {
+      this.errorForm(data);
     }
   }
 
-  private errorForm(data) {
-    this.error = data.error.error;
+  private errorForm(data): void {
+    this.error = data.error;
   }
 }
