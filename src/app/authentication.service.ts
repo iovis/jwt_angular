@@ -14,6 +14,10 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('rmd-token');
+  }
+
   public login(email, password) {
     const loginData = {
       'user_login': {
