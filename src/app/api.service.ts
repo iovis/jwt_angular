@@ -5,12 +5,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, pluck } from 'rxjs/operators';
 
 import { TokenService } from './token.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
