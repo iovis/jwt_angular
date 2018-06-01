@@ -16,6 +16,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {}
 
+  get isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn;
+  }
+
   logout() {
     console.log('logout');
     localStorage.removeItem('rmd-token');

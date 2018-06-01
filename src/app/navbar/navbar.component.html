@@ -7,16 +7,25 @@
         <a class="nav-link" routerLink="/public">Public</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" routerLink="/private">Private</a>
-      </li>
-
-      <li class="nav-item" [routerLinkActive]="['active']">
+      <li class="nav-item"
+          *ngIf="!isLoggedIn"
+          [routerLinkActive]="['active']"
+      >
         <a class="nav-link" routerLink="/login">Log In</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" (click)="logout()">Log Out</a>
+      <li class="nav-item"
+          *ngIf="isLoggedIn"
+          [routerLinkActive]="['active']"
+      >
+        <a class="nav-link" routerLink="/private">Private</a>
+      </li>
+
+      <li class="nav-item"
+          *ngIf="isLoggedIn"
+          [routerLinkActive]="['active']"
+      >
+        <a class="nav-link" href="#" (click)="logout()">Log Out</a>
       </li>
     </ul>
   </div>
