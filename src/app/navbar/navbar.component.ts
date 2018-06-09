@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthenticationService } from '../authentication.service';
 import { TokenService } from '../token.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { TokenService } from '../token.service';
 })
 export class NavbarComponent {
   constructor(
+    private authenticationService: AuthenticationService,
     private tokenService: TokenService,
     private router: Router
   ) {}
@@ -19,8 +21,16 @@ export class NavbarComponent {
   }
 
   logout() {
+    this.authenticationService.logout().subscribe(
+      data => this.handleLogout(data),
+      error => console.log(error)
+    );
+  }
+
+  private handleLogout(data) {
+    if (!data.success) console.error('error logging out');
+
     this.tokenService.clearToken();
     this.router.navigate(['/']);
-    console.log('logout');
   }
 }

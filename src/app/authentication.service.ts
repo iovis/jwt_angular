@@ -38,4 +38,11 @@ export class AuthenticationService {
       this.tokenService.headers
     );
   }
+
+  logout() {
+    return this.http.delete(
+      `${this.apiUrl}/users/sign_out`,
+      this.tokenService.headers
+    );
+  }
 }
