@@ -60,6 +60,7 @@ export class ApiService {
 
   private failedRenew() {
     this.tokenService.clearToken();
+    alert('You\'ve been logged out for inactivity');
     this.router.navigate(['/']);
   }
 }
