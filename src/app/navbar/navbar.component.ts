@@ -31,6 +31,7 @@ export class NavbarComponent {
     if (!data.success) console.error('error logging out');
 
     this.tokenService.clearToken();
+    alert('Logged out successfully');
     this.router.navigate(['/']);
   }
 }
